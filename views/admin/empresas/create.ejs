@@ -1,0 +1,21 @@
+<%- include('../../header.ejs') %>
+<%- include('../../navbar.ejs') %>
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h2>Criar nova empresa</h2>
+        </div>
+        <div class="card-body">
+            <form action="/admin/empresas/save" method="POST">
+                <input type="text" class="form-control" name="razao" placeholder="Razão Social da empresa"><br>
+                <input type="text" class="form-control" name="fantasia" placeholder="Nome Fansatia da empresa"><br>
+                <input type="text" class="form-control" name="cnpj" placeholder="CNPJ da empresa"><br>
+                <input type="text" class="form-control" name="responsavel" placeholder="Nome completo do Responsavel legal"><br>
+                <button class="btn btn-success">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+    <br>
+</div>
+<%- include('../../footer.ejs') %>

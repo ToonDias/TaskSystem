@@ -1,0 +1,22 @@
+<%- include('../../header.ejs') %>
+<%- include('../../navbar.ejs') %>
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h2>Atualizar empresa</h2>
+        </div>
+        <div class="card-body">
+            <form action="/admin/empresas/update" method="POST">
+                <input type="hidden" name="id" value="<%= empresa.id %>">
+                <input type="text" class="form-control" name="razao" value="<%= empresa.razao %>"><br>
+                <input type="text" class="form-control" name="fantasia" value="<%= empresa.fantasia %>"><br>
+                <input type="text" class="form-control" name="cnpj" value="<%= empresa.cnpj %>"><br>
+                <input type="text" class="form-control" name="responsavel" value="<%= empresa.responsavel %>"><br>
+                <button class="btn btn-success">Atualizar</button>
+            </form>
+        </div>
+    </div>
+    <br>
+</div>
+<%- include('../../footer.ejs') %>

@@ -10,7 +10,7 @@ const Empresa = Connection.define('empresas', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    CNPJ: {
+    cnpj: {
         type: Sequelize.STRING,
         allowNull: false
     },
