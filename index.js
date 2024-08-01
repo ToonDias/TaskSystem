@@ -4,6 +4,8 @@ const Connection = require("./database/database");
 
 const Empresa = require("./empresas/Empresa");
 const empresaController = require("./empresas/empresaController");
+const Funcionario = require("./funcionarios/Funcionario");
+const funcionarioController = require("./funcionarios/funcionarioController");
 
 const app = express();
 
@@ -28,6 +30,7 @@ Connection.authenticate()
 
 // definição das urls
 app.use("/", empresaController);
+app.use("/", funcionarioController);
 
 // Rota raiz
 app.get("/", (req, res) => {
