@@ -25,7 +25,7 @@
                 <td><%= empresa.responsavel %></td>
                 <td>
                     <a href="/admin/empresas/editar/<%= empresa.id %>" class="btn btn-warning">Editar</a>
-                    <form action="/admin/empresas/delete" method="POST" style="display: inline-block">
+                    <form action="/admin/empresas/delete" method="POST" style="display: inline-block;" onsubmit="toSubmit(event, this);">
                         <input type="hidden" name="id" value="<%= empresa.id %>">
                         <button class="btn btn-danger">Deletar</button>
                     </form>
@@ -36,3 +36,13 @@
     <br>
 </div>
 <%- include('../../footer.ejs') %>
+
+<script>
+    function toSubmit(event, form){
+        event.preventDefault();
+        var decision = confirm("Deseja deletar essa empresa?");
+        if(decision){
+            form.submit();
+        }
+    }
+</script>

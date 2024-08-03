@@ -38,11 +38,25 @@ router.get("/admin/funcionarios/editar/:id", (req, res) => {
 });
 
 router.post("/admin/funcionarios/update", (req, res) => {
-    //parou aqui
+    var id = req.body.id;
+    var nome = req.body.nome;
+    var cpf = req.body.cpf;
+    var sexo = req.body.sexo;
+    var cargo = req.body.cargo;
+
+    Funcionario.update({nome, cpf, sexo, cargo},{where: {id}}).then( () => {
+        res.redirect("/admin/funcionarios");
+    });
 });
 // update
 
 // delete
+router.post("/admin/funcionarios/delete", (req, res) => {
+    var id = req.body.id;
+    Funcionario.destroy({where: {id}}).then(() => {
+        res.redirect("/admin/funcionarios");
+    });
+});
 // delete
 
 module.exports = router;
