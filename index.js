@@ -6,6 +6,9 @@ const Empresa = require("./empresas/Empresa");
 const empresaController = require("./empresas/empresaController");
 const Funcionario = require("./funcionarios/Funcionario");
 const funcionarioController = require("./funcionarios/funcionarioController");
+const Listas = require("./listas/Lista");
+const listaController = require("./listas/listacontroller");
+
 
 const app = express();
 
@@ -31,6 +34,7 @@ Connection.authenticate()
 // definição das urls
 app.use("/", empresaController);
 app.use("/", funcionarioController);
+app.use("/", listaController);
 
 // Rota raiz
 app.get("/", (req, res) => {

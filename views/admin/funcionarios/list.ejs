@@ -18,18 +18,20 @@
         </thead>
         <tbody>
             <% funcionarios.forEach( funcionario =>{ %>
-                <td><%= funcionario.id %></td>
-                <td><%= funcionario.nome %></td>
-                <td><%= funcionario.cpf %></td>
-                <td><%= funcionario.sexo %></td>
-                <td><%= funcionario.cargo %></td>
-                <td>
-                    <a href="/admin/funcionarios/editar/<%= funcionario.id %>" class="btn btn-warning">Editar</a>
-                    <form action="/admin/funcionarios/delete" method="POST" style="display: inline-block;" onsubmit="toSubmit(event, this);">
-                        <input type="hidden" name="id" value="<%= funcionario.id %>">
-                        <button class="btn btn-danger">Deletar</button>
-                    </form>
-                </td>
+                <tr>
+                    <td><%= funcionario.id %></td>
+                    <td><%= funcionario.nome %></td>
+                    <td><%= funcionario.cpf %></td>
+                    <td><%= funcionario.sexo %></td>
+                    <td><%= funcionario.cargo %></td>
+                    <td>
+                        <a href="/admin/funcionarios/editar/<%= funcionario.id %>" class="btn btn-warning">Editar</a>
+                        <form action="/admin/funcionarios/delete" method="POST" style="display: inline-block;" onsubmit="toSubmit(event, this);">
+                            <input type="hidden" name="id" value="<%= funcionario.id %>">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
             <% }) %>
         </tbody>
     </table>

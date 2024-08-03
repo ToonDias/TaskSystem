@@ -9,10 +9,10 @@ router.get("/admin/empresas/create", (req, res) => {
 });
 
 router.post("/admin/empresas/save", (req, res) => {
-    const razao = req.body.razao;
-    const fantasia = req.body.fantasia;
-    const cnpj = req.body.cnpj;
-    const responsavel = req.body.responsavel;
+    var razao = req.body.razao;
+    var fantasia = req.body.fantasia;
+    var cnpj = req.body.cnpj;
+    var responsavel = req.body.responsavel;
 
     Empresa.create({razao, fantasia, cnpj, responsavel}).then(() =>{
         res.redirect("/admin/empresas");

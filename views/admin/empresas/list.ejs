@@ -18,18 +18,20 @@
         </thead>
         <tbody>
             <% empresas.forEach( empresa =>{ %>
-                <td><%= empresa.id %></td>
-                <td><%= empresa.razao %></td>
-                <td><%= empresa.fantasia %></td>
-                <td><%= empresa.cnpj %></td>
-                <td><%= empresa.responsavel %></td>
-                <td>
-                    <a href="/admin/empresas/editar/<%= empresa.id %>" class="btn btn-warning">Editar</a>
-                    <form action="/admin/empresas/delete" method="POST" style="display: inline-block;" onsubmit="toSubmit(event, this);">
-                        <input type="hidden" name="id" value="<%= empresa.id %>">
-                        <button class="btn btn-danger">Deletar</button>
-                    </form>
-                </td>
+                <tr>
+                    <td><%= empresa.id %></td>
+                    <td><%= empresa.razao %></td>
+                    <td><%= empresa.fantasia %></td>
+                    <td><%= empresa.cnpj %></td>
+                    <td><%= empresa.responsavel %></td>
+                    <td>
+                        <a href="/admin/empresas/editar/<%= empresa.id %>" class="btn btn-warning">Editar</a>
+                        <form action="/admin/empresas/delete" method="POST" style="display: inline-block;" onsubmit="toSubmit(event, this);">
+                            <input type="hidden" name="id" value="<%= empresa.id %>">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
             <% }) %>
         </tbody>
     </table>

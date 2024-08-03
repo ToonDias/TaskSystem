@@ -1,0 +1,48 @@
+<%- include('../../header.ejs') %>
+<%- include('../../navbar.ejs') %>
+<div class="container">
+    <br>
+    <a href="/admin/listas/create" class="btn btn-success">Novo Lista</a>
+    <br>
+    <br>
+    <table class="table  table-stripet table-bordered text-center">
+        <thead class="table-primary">
+            <tr>
+                <th>#</th>
+                <th>Titulo</th>
+                <th>Responsavel</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% listas.forEach( lista =>{ %>
+                <tr>
+                   <td><%= lista.id %></td>
+                    <td><%= lista.titulo %></td>
+                    <td><%= lista.responsavel %></td>
+                    <td><%= lista.status %></td>
+                    <td>
+                        <a href="/admin/listas/editar/<%= lista.id %>" class="btn btn-warning">Editar</a>
+                        <form action="/admin/listas/delete" method="POST" style="display: inline-block;" onsubmit="toSubmit(event, this);">
+                            <input type="hidden" name="id" value="<%= lista.id %>">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td> 
+                </tr> 
+            <% }) %>
+        </tbody>
+    </table>
+    <br>
+</div>
+<%- include('../../footer.ejs') %>
+
+<script>
+    function toSubmit(event, form){
+        event.preventDefault();
+        var decision = confirm("Deseja deletar esse funcionário?");
+        if(decision){
+            form.submit();
+        }
+    }
+</script>
