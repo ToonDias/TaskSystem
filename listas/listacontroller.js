@@ -45,6 +45,12 @@ router.post("/admin/listas/updade", (req, res) => {
         res.redirect("/admin/listas");
     });
 });
-
 // Update
+router.post("/admin/listas/delete", (req, res) => {
+    var id = req.body.id;
+    Lista.destroy({where: {id}}).then(() => {
+        res.redirect("/admin/listas");
+    });
+});
+//
 module.exports = router;
