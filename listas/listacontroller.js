@@ -25,4 +25,26 @@ router.get("/admin/listas", (req, res) =>{
         res.render("admin/listas/list",{listas});
     });    
 });
+// Listar
+
+// Update
+router.get("/admin/listas/editar/:id", (req, res) => {
+    var id = req.params.id;
+    Lista.findByPk(id).then( lista => {
+        res.render("admin/listas/update", {lista});
+    });
+});
+
+router.post("/admin/listas/updade", (req, res) => {
+    var id = req.body.id;
+    var titulo = req.body.titulo;
+    var responsavel = req.body.responsavel;
+    var status = req.body.status;
+
+    Lista.update({titulo, responsavel, status}, {where: {id}}).then(() => {
+        res.redirect("/admin/listas");
+    });
+});
+
+// Update
 module.exports = router;
