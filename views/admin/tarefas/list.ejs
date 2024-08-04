@@ -1,0 +1,46 @@
+<%- include('../../header.ejs') %>
+<%- include('../../navbar.ejs') %>
+<div class="container">
+    <br>
+    <a href="/admin/tarefas/create" class="btn btn-success">Novo Tarefa</a>
+    <br>
+    <br>
+    <table class="table  table-stripet table-bordered text-center">
+        <thead class="table-primary">
+            <tr>
+                <th>#</th>
+                <th>Titulo</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% tarefas.forEach( tarefa =>{ %>
+                <tr>
+                    <td><%= tarefa.id %></td>
+                    <td><%= tarefa.titulo %></td>
+                    <td><%= tarefa.descricao %></td>
+                    <td>
+                        <a href="/admin/tarefas/editar/<%= tarefa.id %>" class="btn btn-warning">Editar</a>
+                        <form action="/admin/tarefas/delete" method="POST" style="display: inline-block;" onsubmit="toSubmit(event, this);">
+                            <input type="hidden" name="id" value="<%= tarefa.id %>">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td> 
+                </tr> 
+            <% }) %>
+        </tbody>
+    </table>
+    <br>
+</div>
+<%- include('../../footer.ejs') %>
+
+<script>
+    function toSubmit(event, form){
+        event.preventDefault();
+        var decision = confirm("Deseja deletar essa tarefa?");
+        if(decision){
+            form.submit();
+        }
+    }
+</script>

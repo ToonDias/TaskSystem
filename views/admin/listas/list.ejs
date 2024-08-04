@@ -23,7 +23,7 @@
                     <td><%= lista.responsavel %></td>
                     <td><%= lista.status %></td>
                     <td>
-                        <a href="#" class="btn btn-primary"><strong>+</strong>Tarefa</a>
+                        <a href="/admin/tarefas" class="btn btn-primary">Tarefas</a>
                         <a href="/admin/listas/editar/<%= lista.id %>" class="btn btn-warning">Editar</a>
                         <form action="/admin/listas/delete" method="POST" style="display: inline-block;" onsubmit="toSubmit(event, this);">
                             <input type="hidden" name="id" value="<%= lista.id %>">

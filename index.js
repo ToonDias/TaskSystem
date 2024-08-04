@@ -8,6 +8,8 @@ const Funcionario = require("./funcionarios/Funcionario");
 const funcionarioController = require("./funcionarios/funcionarioController");
 const Listas = require("./listas/Lista");
 const listaController = require("./listas/listacontroller");
+const Tarefa = require("./tarefas/Tarefa");
+const tarefaController = require("./tarefas/tarefaController");
 
 
 const app = express();
@@ -35,6 +37,7 @@ Connection.authenticate()
 app.use("/", empresaController);
 app.use("/", funcionarioController);
 app.use("/", listaController);
+app.use("/", tarefaController);
 
 // Rota raiz
 app.get("/", (req, res) => {

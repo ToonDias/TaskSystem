@@ -1,0 +1,20 @@
+<%- include('../../header.ejs') %>
+<%- include('../../navbar.ejs') %>
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h2>Atualizar tarefa</h2>
+        </div>
+        <div class="card-body">
+            <form action="/admin/tarefas/updade" method="POST">
+                <input type="hidden" name="id" value=" <%= tarefa.id %>">
+                <input type="text" class="form-control" name="titulo" value="<%= tarefa.titulo %>"><br>
+                <textarea type="text" class="form-control" name="descricao" value="<%= tarefa.descricao %>"></textarea><br>
+                <button class="btn btn-success">Atualizar</button>
+            </form>
+        </div>
+    </div>
+    <br>
+</div>
+<%- include('../../footer.ejs') %>
