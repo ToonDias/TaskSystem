@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const Connection = require("../database/database");
+const Empresa =  require("../empresas/Empresa");
 
 Funcionario = Connection.define('funcionarios', {
     nome: {
@@ -19,6 +20,8 @@ Funcionario = Connection.define('funcionarios', {
         allowNull: false
     },
 });
+
+Funcionario.belongsTo(Empresa);
 
 //Funcionario.sync({force: true});
 

@@ -2,10 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 const Funcionario = require("./Funcionario");
+const Empresa = require("../empresas/Empresa");
 
 // create
 router.get("/admin/funcionarios/create", (req, res) => {
-    res.render("admin/funcionarios/create");
+    Empresa.findAll(). then( empresas => {
+        res.render("admin/funcionarios/create",{empresas});
+    });
 });
 
 router.post("/admin/funcionarios/save", (req, res) => {

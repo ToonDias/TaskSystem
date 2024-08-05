@@ -12,6 +12,12 @@
                 <input type="text" class="form-control" name="cpf" placeholder="CPF do funcionário"><br>
                 <input type="text" class="form-control" name="sexo" placeholder="Sexo"><br>
                 <input type="text" class="form-control" name="cargo" placeholder="Cargo do funcionário"><br>
+                <select name="empresa" class="form-select">
+                    <% empresas.forEach( empresa => { %>
+                    <option value="<%= empresa.id %>"><%= empresa.fantasia %></option>
+                    <% }) %>
+                </select>
+                <br>
                 <button class="btn btn-success">Cadastrar</button>
             </form>
         </div>
