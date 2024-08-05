@@ -13,6 +13,16 @@
                 <input type="text" class="form-control" name="cpf" value="<%= funcionario.cpf %>"><br>
                 <input type="text" class="form-control" name="sexo" value="<%= funcionario.sexo %>"><br>
                 <input type="text" class="form-control" name="cargo" value="<%= funcionario.cargo %>"><br>
+                <select name="empresa" class="form-select">
+                    <% empresas.forEach( empresa => { %>
+                        <% if(funcionario.empresaId == empresa.id){ %>
+                            <option value="<%= empresa.id %>" selected><%= empresa.fantasia %></option>
+                        <% }else{ %>
+                            <option value="<%= empresa.id %>"><%= empresa.fantasia %></option>
+                        <% } %>
+                    <% }) %>
+                </select>
+                <br>
                 <button class="btn btn-success">Atualizar</button>
             </form>
         </div>

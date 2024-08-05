@@ -42,9 +42,10 @@ router.get("/admin/funcionarios/empresas/:id", (req, res) => {
 // update
 router.get("/admin/funcionarios/editar/:id", (req, res) => {
     var id = req.params.id;
-
-    Funcionario.findByPk(id).then( funcionario => {
-        res.render("admin/funcionarios/update", {funcionario});
+    Empresa.findAll().then( empresas => {
+        Funcionario.findByPk(id).then( funcionario => {
+            res.render("admin/funcionarios/update", {funcionario, empresas});
+        });
     });
 });
 
