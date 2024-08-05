@@ -11,6 +11,13 @@
                 <input type="hidden" name="id" value="<%= funcionario.id %>">
                 <input type="text" class="form-control" name="nome" value="<%= funcionario.nome %>"><br>
                 <input type="text" class="form-control" name="cpf" value="<%= funcionario.cpf %>"><br>
+                <select name="sexo" class="form-select">
+                    <option value="<%= funcionario.sexo%>" selected><%= funcionario.sexo%></option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Não declarado">Não declarado</option>
+                </select>
+                <br>
                 <input type="text" class="form-control" name="sexo" value="<%= funcionario.sexo %>"><br>
                 <input type="text" class="form-control" name="cargo" value="<%= funcionario.cargo %>"><br>
                 <select name="empresa" class="form-select">
