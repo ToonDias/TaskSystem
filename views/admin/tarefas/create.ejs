@@ -9,6 +9,7 @@
         <div class="card-body">
             <form action="/admin/tarefas/save" method="POST">
                 <input type="text" class="form-control" name="titulo" placeholder="Titulo da tarefa"><br>
+                <input type="hidden" name="lista" value="<%= lista.id %>">
                 <textarea type="text" class="form-control" name="descricao" placeholder="descrição da tarefa"></textarea><br>
                 <button class="btn btn-success">Cadastrar</button>
             </form>
