@@ -9,8 +9,18 @@
         <div class="card-body">
             <form action="/admin/listas/save" method="POST">
                 <input type="text" class="form-control" name="titulo" placeholder="Titulo da lista"><br>
-                <input type="text" class="form-control" name="responsavel" placeholder="Nome do responsavel"><br>
-                <input type="text" class="form-control" name="status" placeholder="Grau de urgencia"><br>
+                <select name="responsavel" class="form-select">
+                    <option selected disabled>Nome do responsável</option> 
+                    <% funcionarios.forEach( funcionario => { %> 
+                        <option value="<%= funcionario.id %>"><%= funcionario.nome %></option> 
+                    <% }) %>
+                </select><br>
+                <select name="status" class="form-select">
+                    <option selected disabled>Grau de urgencia</option>
+                    <option value="Alto">Alto</option>
+                    <option value="Medio">Medio</option>
+                    <option value="Baixo">Baixo</option>
+                </select><br>
                 <button class="btn btn-success">Cadastrar</button>
             </form>
         </div>

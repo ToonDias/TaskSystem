@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const Connection = require("../database/database");
 
+const Lista = require("../listas/Lista");
+
 const Tarefa = Connection.define("tarefas", {
     titulo: {
         type: Sequelize.STRING,
@@ -11,6 +13,8 @@ const Tarefa = Connection.define("tarefas", {
         allowNull: false
     }
 });
+
+Tarefa.belongsTo(Lista);
 
 //Tarefa.sync({force: true});
 
