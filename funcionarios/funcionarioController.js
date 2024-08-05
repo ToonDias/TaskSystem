@@ -16,8 +16,9 @@ router.post("/admin/funcionarios/save", (req, res) => {
     var cpf = req.body.cpf;
     var sexo = req.body.sexo;
     var cargo = req.body.cargo;
+    var empresaId  = req.body.empresa;
 
-    Funcionario.create({nome, cpf, sexo, cargo}).then( () => {
+    Funcionario.create({nome, cpf, sexo, cargo, empresaId}).then( () => {
         res.redirect("/admin/funcionarios");
     });
 });
@@ -26,6 +27,13 @@ router.post("/admin/funcionarios/save", (req, res) => {
 // list
 router.get("/admin/funcionarios", (req, res) => {
     Funcionario.findAll().then( funcionarios => {
+        res.render("admin/funcionarios/list", {funcionarios});
+    });
+});
+
+router.get("/admin/funcionarios/empresas/:id", (req, res) => {
+    var empresaId = req.params.id;
+    Funcionario.findAll({where: {empresaId}}).then( funcionarios => {
         res.render("admin/funcionarios/list", {funcionarios});
     });
 });

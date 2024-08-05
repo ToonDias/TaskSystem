@@ -10,7 +10,11 @@
             <form action="/admin/funcionarios/save" method="POST">
                 <input type="text" class="form-control" name="nome" placeholder="Nome do funcionário"><br>
                 <input type="text" class="form-control" name="cpf" placeholder="CPF do funcionário"><br>
-                <input type="text" class="form-control" name="sexo" placeholder="Sexo"><br>
+                <select name="sexo" class="form-select">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Não declarado">Não declarado</option>
+                </select><br>
                 <input type="text" class="form-control" name="cargo" placeholder="Cargo do funcionário"><br>
                 <select name="empresa" class="form-select">
                     <% empresas.forEach( empresa => { %>

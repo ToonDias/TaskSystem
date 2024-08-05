@@ -13,6 +13,7 @@
                 <th>CPF</th>
                 <th>Sexo</th>
                 <th>Cargo</th>
+                <th>empresa</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                     <td><%= funcionario.cpf %></td>
                     <td><%= funcionario.sexo %></td>
                     <td><%= funcionario.cargo %></td>
+                    <td><%= funcionario.empresaId %></td>
                     <td>
                         <a href="/admin/funcionarios/editar/<%= funcionario.id %>" class="btn btn-warning">Editar</a>
                         <form action="/admin/funcionarios/delete" method="POST" style="display: inline-block;" onsubmit="toSubmit(event, this);">
