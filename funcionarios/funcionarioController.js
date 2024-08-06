@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Funcionario = require("./Funcionario");
 const Empresa = require("../empresas/Empresa");
+const Lista = require("../listas/Lista");
 
 // create
 router.get("/admin/funcionarios/create", (req, res) => {
