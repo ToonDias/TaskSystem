@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const Connection = require("../database/database");
 
+const Funcionario = require("../funcionarios/Funcionario");
+
 const User = Connection.define("users", {
     login: {
         type: Sequelize.STRING,
@@ -12,6 +14,9 @@ const User = Connection.define("users", {
     }
 });
 
-User.sync({force: true});
+
+User.belongsTo(Funcionario);
+
+//User.sync({force: true});
 
 module.exports = User;

@@ -10,7 +10,8 @@ const Listas = require("./listas/Lista");
 const listaController = require("./listas/listacontroller");
 const Tarefa = require("./tarefas/Tarefa");
 const tarefaController = require("./tarefas/tarefaController");
-
+const User = require("./usuarios/User");
+const userController = require("./usuarios/userController");
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use("/", empresaController);
 app.use("/", funcionarioController);
 app.use("/", listaController);
 app.use("/", tarefaController);
+app.use("/", userController);
 
 // Rota raiz
 app.get("/", (req, res) => {

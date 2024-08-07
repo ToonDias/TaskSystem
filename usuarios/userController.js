@@ -5,51 +5,51 @@ const User = require("./User");
 const Funcionario = require("../funcionarios/Funcionario");
 
 // Create
-router.get("/admin/users/create", (req, res) => {
+router.get("/admin/usuarios/create", (req, res) => {
     Funcionario.findAll().then( funcionarios => {
-        res.render("admin/users/create", {funcionarios});
+        res.render("admin/usuarios/create", {funcionarios});
     });
 });
 
-router.post("/admin/users/save", (req, res) => {
+router.post("/admin/usuarios/save", (req, res) => {
     var {login, senha, funcionarioId} = req.body;
     User.create({login, senha, funcionarioId}).then( () => {
-        res.redirect("/admin/users");
+        res.redirect("/admin/usuarios");
     });
 });
 // Create
 
 // List
-router.get("/admin/users", (req, res) => {
+router.get("/admin/usuarios", (req, res) => {
     User.findAll().then( users => {
-        res.render("admin/users/list", {users});
+        res.render("admin/usuarios/list", {users});
     });
 });
 // List
 
 // Update
-router.get("/admin/users/edit/:id", (req, res) => {
+router.get("/admin/usuarios/editar/:id", (req, res) => {
     var id = req.params.id;
     Funcionario.findAll().then( funcionarios => {
         User.findByPk(id).then( user => {        
-                res.render("admin/users/create", {user, funcionarios});
+                res.render("admin/usuarios/update", {user, funcionarios});
             });
     });
 });
 
-router.post("/admin/users/edit/update", (req, res) => {
+router.post("/admin/usuarios/edit/update", (req, res) => {
     var {id, login, senha, funcionarioId} = req.body;
     User.update({login, senha, funcionarioId}, {where: {id}}).then(() => {
-        res.redirect("/admin/list");
+        res.redirect("/admin/usuarios");
     });
 });
 // Update
 
 // Delete
-router.post("/admin/users/delete", (req, res) => {
+router.post("/admin/usuarios/delete", (req, res) => {
     var id = req.body.id;
     User.destroy({where: {id}}).then(() => {
-        res.redirect("/admin/users");
+        res.redirect("/admin/usuarios");
     });
 });
 // Delete

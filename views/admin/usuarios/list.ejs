@@ -1,0 +1,48 @@
+<%- include('../../header.ejs') %>
+<%- include('../../navbar.ejs') %>
+<div class="container">
+    <br>
+    <a href="/admin/usuarios/create" class="btn btn-success">Novo usuários</a>
+    <br>
+    <br>
+    <table class="table  table-stripet table-bordered text-center">
+        <thead class="table-primary">
+            <tr>
+                <th>#</th>
+                <th>Login</th>
+                <th>Senha</th>
+                <th>Funcionário</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach( user =>{ %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.login %></td>
+                    <td><%= user.senha %></td>
+                    <td><%= user.funcionarioId %></td>
+                    <td>
+                        <a href="/admin/usuarios/editar/<%= user.id %>" class="btn btn-warning">Editar</a>
+                        <form action="/admin/usuarios/delete" method="POST" style="display: inline-block;" onsubmit="toSubmit(event, this);">
+                            <input type="hidden" name="id" value="<%= user.id %>">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <br>
+</div>
+<%- include('../../footer.ejs') %>
+
+<script>
+    function toSubmit(event, form){
+        event.preventDefault();
+        var decision = confirm("Deseja deletar esse usuário?");
+        if(decision){
+            form.submit();
+        }
+    }
+</script>

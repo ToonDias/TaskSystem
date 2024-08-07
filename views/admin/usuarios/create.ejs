@@ -1,0 +1,25 @@
+<%- include('../../header.ejs') %>
+<%- include('../../navbar.ejs') %>
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h2>Criar novo usuário</h2>
+        </div>
+        <div class="card-body">
+            <form action="/admin/usuarios/save" method="POST">
+                <input type="text" class="form-control" name="login" placeholder="Login"><br>
+                <input type="password" class="form-control" name="senha" placeholder="********"><br>
+                <select name="funcionarioId" class="form-select">
+                    <% funcionarios.forEach( funcionario => { %>
+                    <option value="<%= funcionario.id %>"><%= funcionario.nome %></option>
+                    <% }) %>
+                </select>
+                <br>
+                <button class="btn btn-success">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+    <br>
+</div>
+<%- include('../../footer.ejs') %>
