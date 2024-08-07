@@ -37,7 +37,7 @@ router.get("/admin/usuarios/editar/:id", (req, res) => {
     });
 });
 
-router.post("/admin/usuarios/edit/update", (req, res) => {
+router.post("/admin/usuarios/update", (req, res) => {
     var {id, login, senha, funcionarioId} = req.body;
     User.update({login, senha, funcionarioId}, {where: {id}}).then(() => {
         res.redirect("/admin/usuarios");

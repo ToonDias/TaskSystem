@@ -17,7 +17,7 @@
                     <option value="Não declarado">Não declarado</option>
                 </select><br>
                 <input type="text" class="form-control" name="cargo" placeholder="Cargo do funcionário"><br>
-                <select name="empresa" class="form-select">
+                <select name="empresaId" class="form-select">
                     <% empresas.forEach( empresa => { %>
                     <option value="<%= empresa.id %>"><%= empresa.fantasia %></option>
                     <% }) %>

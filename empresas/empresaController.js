@@ -9,11 +9,7 @@ router.get("/admin/empresas/create", (req, res) => {
 });
 
 router.post("/admin/empresas/save", (req, res) => {
-    var razao = req.body.razao;
-    var fantasia = req.body.fantasia;
-    var cnpj = req.body.cnpj;
-    var responsavel = req.body.responsavel;
-
+    var {razao, fantasia, cnpj, responsavel} = req.body;
     Empresa.create({razao, fantasia, cnpj, responsavel}).then(() =>{
         res.redirect("/admin/empresas");
     });
@@ -37,13 +33,8 @@ router.get("/admin/empresas/editar/:id", (req, res) => {
 });
 
 router.post("/admin/empresas/update", (req, res) => {
-    var id = req.body.id;
-    var razao = req.body.razao;
-    var fantasia = req.body.fantasia;
-    var cnpj = req.body.cnpj;
-    var responsavel = req.body.responsavel;
-
-    Empresa.update({razao,fantasia,cnpj,responsavel},{where: {id}}).then(() => {
+    var {id, razao, fantasia, cnpj, responsavel} = req.body;
+    Empresa.update({razao, fantasia, cnpj, responsavel},{where: {id}}).then(() => {
         res.redirect("/admin/empresas");
     });
 });

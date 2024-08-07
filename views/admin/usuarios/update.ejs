@@ -7,7 +7,8 @@
             <h2>Atualizar usuário</h2>
         </div>
         <div class="card-body">
-            <form action="/admin/usuarios/save" method="POST">
+            <form action="/admin/usuarios/update" method="POST">
+                <input type="hidden" name="id" value="<%= user.id %>">
                 <input type="text" class="form-control" name="login" value="<%= user.login %>"><br>
                 <input type="password" class="form-control" name="senha" value="<%= user.senha %>"><br>
                 <select name="funcionarioId" class="form-select">
@@ -20,7 +21,7 @@
                     <% }) %>
                 </select>
                 <br>
-                <button class="btn btn-success">Cadastrar</button>
+                <button class="btn btn-success">Atualizar</button>
             </form>
         </div>
     </div>

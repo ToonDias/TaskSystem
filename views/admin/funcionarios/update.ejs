@@ -19,7 +19,7 @@
                 </select>
                 <br>
                 <input type="text" class="form-control" name="cargo" value="<%= funcionario.cargo %>"><br>
-                <select name="empresa" class="form-select">
+                <select name="empresaId" class="form-select">
                     <% empresas.forEach( empresa => { %>
                         <% if(funcionario.empresaId == empresa.id){ %>
                             <option value="<%= empresa.id %>" selected><%= empresa.fantasia %></option>

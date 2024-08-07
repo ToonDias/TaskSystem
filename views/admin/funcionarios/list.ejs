@@ -25,9 +25,9 @@
                     <td><%= funcionario.cpf %></td>
                     <td><%= funcionario.sexo %></td>
                     <td><%= funcionario.cargo %></td>
-                    <td><%= funcionario.empresa.razao %></td>
+                    <td><%= funcionario.empresa.fantasia %></td>
                     <td>
-                        <a href="/admin/listas/funcionario/<%= funcionario.id %>" class="btn btn-primary">Listas</a>
+                        <a href="/admin/funcionario/<%= funcionario.id %>/listas" class="btn btn-primary">Listas</a>
                         <a href="/admin/funcionarios/editar/<%= funcionario.id %>" class="btn btn-warning">Editar</a>
                         <form action="/admin/funcionarios/delete" method="POST" style="display: inline-block;" onsubmit="toSubmit(event, this);">
                             <input type="hidden" name="id" value="<%= funcionario.id %>">

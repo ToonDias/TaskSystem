@@ -12,11 +12,7 @@ router.get("/admin/listas/create",(req ,res) => {
 });
 
 router.post("/admin/listas/save", (req, res) => {
-    var titulo = req.body.titulo;
-    var responsavel = req.body.responsavel;
-    var status = req.body.status;
-    var funcionarioId = req.body.responsavel;
-
+    var {titulo, responsavel, status, funcionarioId} = req.body;
     Lista.create({titulo, responsavel, status, funcionarioId}).then(() =>{
         res.redirect("/admin/listas");
     });
@@ -30,7 +26,7 @@ router.get("/admin/listas", (req, res) =>{
     });    
 });
 
-router.get("/admin/listas/funcionario/:id", (req, res) => {
+router.get("/admin/funcionario/:id/listas", (req, res) => {
     var funcionarioId = req.params.id;
     Lista.findAll({include: [{model: Funcionario}]},{where: {funcionarioId}}).then( listas => {
         res.render("admin/listas/list",{listas});
@@ -49,21 +45,20 @@ router.get("/admin/listas/editar/:id", (req, res) => {
 });
 
 router.post("/admin/listas/updade", (req, res) => {
-    var id = req.body.id;
-    var titulo = req.body.titulo;
-    var responsavel = req.body.responsavel;
-    var status = req.body.status;
-
-    Lista.update({titulo, responsavel, status}, {where: {id}}).then(() => {
+    var {id, titulo, responsavel, status, funcionarioId} = req.body;
+    Lista.update({titulo, responsavel, status, funcionarioId}, {where: {id}}).then(() => {
         res.redirect("/admin/listas");
     });
 });
 // Update
+
+// Delete
 router.post("/admin/listas/delete", (req, res) => {
     var id = req.body.id;
     Lista.destroy({where: {id}}).then(() => {
         res.redirect("/admin/listas");
     });
 });
-//
+// Delete
+
 module.exports = router;

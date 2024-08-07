@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const Connection = require("../database/database");
+
 const Empresa =  require("../empresas/Empresa");
 
 Funcionario = Connection.define('funcionarios', {

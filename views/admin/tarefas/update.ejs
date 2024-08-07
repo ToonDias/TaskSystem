@@ -7,7 +7,7 @@
             <h2>Atualizar tarefa</h2>
         </div>
         <div class="card-body">
-            <form action="/admin/tarefas/updade" method="POST">
+            <form action="/admin/tarefa/updade" method="POST">
                 <input type="hidden" name="id" value=" <%= tarefa.id %>">
                 <input type="text" class="form-control" name="titulo" value="<%= tarefa.titulo %>"><br>
                 <textarea type="text" class="form-control" name="descricao" value="<%= tarefa.descricao %>"></textarea><br>

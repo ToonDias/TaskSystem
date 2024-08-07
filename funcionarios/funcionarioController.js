@@ -3,7 +3,6 @@ const router = express.Router();
 
 const Funcionario = require("./Funcionario");
 const Empresa = require("../empresas/Empresa");
-const Lista = require("../listas/Lista");
 
 // create
 router.get("/admin/funcionarios/create", (req, res) => {
@@ -13,12 +12,7 @@ router.get("/admin/funcionarios/create", (req, res) => {
 });
 
 router.post("/admin/funcionarios/save", (req, res) => {
-    var nome = req.body.nome;
-    var cpf = req.body.cpf;
-    var sexo = req.body.sexo;
-    var cargo = req.body.cargo;
-    var empresaId  = req.body.empresa;
-
+    var {nome, cpf, sexo, cargo, empresaId} = req.body;
     Funcionario.create({nome, cpf, sexo, cargo, empresaId}).then( () => {
         res.redirect("/admin/funcionarios");
     });
@@ -32,7 +26,7 @@ router.get("/admin/funcionarios", (req, res) => {
     });
 });
 
-router.get("/admin/funcionarios/empresas/:id", (req, res) => {
+router.get("/admin/empresa/:id/funcionarios", (req, res) => {
     var empresaId = req.params.id;
     Funcionario.findAll({ include: [{model: Empresa}]}, {where: {empresaId}}).then( funcionarios => {
         res.render("admin/funcionarios/list", {funcionarios});
@@ -51,13 +45,8 @@ router.get("/admin/funcionarios/editar/:id", (req, res) => {
 });
 
 router.post("/admin/funcionarios/update", (req, res) => {
-    var id = req.body.id;
-    var nome = req.body.nome;
-    var cpf = req.body.cpf;
-    var sexo = req.body.sexo;
-    var cargo = req.body.cargo;
-
-    Funcionario.update({nome, cpf, sexo, cargo},{where: {id}}).then( () => {
+    var {id, nome, cpf, sexo, cargo, empresaId} = req.body;
+    Funcionario.update({nome, cpf, sexo, cargo, empresaId},{where: {id}}).then( () => {
         res.redirect("/admin/funcionarios");
     });
 });

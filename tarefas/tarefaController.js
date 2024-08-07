@@ -13,18 +13,15 @@ router.get("/admin/lista/:id/tarefas/create", (req, res) => {
 });
 
 router.post("/admin/tarefas/save", (req, res) => {
-    var titulo = req.body.titulo;
-    var descricao = req.body.descricao;
-    var listaId = req.body.lista;
-
+    var {titulo, descricao, listaId} = req.body;
     Tarefa.create({titulo, descricao, listaId}).then( () => {
-        res.redirect("/admin/tarefas/lista/" + listaId);
+        res.redirect("/admin/lista/" + listaId + "/tarefas");
     });
 });
 // Create
 
 // Listar
-router.get("/admin/tarefas/lista/:id", (req, res) => {
+router.get("/admin/lista/:id/tarefas", (req, res) => {
     var listaId = req.params.id;
     Tarefa.findAll({where: {listaId}}).then( tarefas => {
         Lista.findByPk(listaId).then( lista => {
@@ -38,19 +35,13 @@ router.get("/admin/tarefas/lista/:id", (req, res) => {
 router.get("/admin/tarefas/editar/:id", (req, res) => {
     var id = req.params.id;
     Tarefa.findByPk(id).then( tarefa => {
-        Lista.findAll().then( listas => {
-            res.render("admin/tarefas/update", {tarefa, listas});
+            res.render("admin/tarefas/update", {tarefa});
         });
-    });
 });
 
-router.post("/admin/tarefa/updafe", (req, res) => {
-    var id = req.body.id;
-    var titulo = req.body.titulo;
-    var descricao = req.body.descricao;
-    var listaId = req.body.lista;
-
-    Tarefa.update({titulo, descricao, listaId}, {where: {id}}).then( () => {
+router.post("/admin/tarefa/updade", (req, res) => {
+    var {id, titulo, descricao} = req.body;
+    Tarefa.update({titulo, descricao}, {where: {id}}).then( () => {
         res.redirect("/admin/tarefas");
     });
 });
