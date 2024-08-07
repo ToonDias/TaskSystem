@@ -25,7 +25,7 @@
                     <td><%= funcionario.cpf %></td>
                     <td><%= funcionario.sexo %></td>
                     <td><%= funcionario.cargo %></td>
-                    <td><%= funcionario.empresaId %></td>
+                    <td><%= funcionario.empresa.razao %></td>
                     <td>
                         <a href="/admin/listas/funcionario/<%= funcionario.id %>" class="btn btn-primary">Listas</a>
                         <a href="/admin/funcionarios/editar/<%= funcionario.id %>" class="btn btn-warning">Editar</a>

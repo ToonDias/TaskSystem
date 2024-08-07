@@ -25,14 +25,14 @@ router.post("/admin/listas/save", (req, res) => {
 
 // Listar
 router.get("/admin/listas", (req, res) =>{
-    Lista.findAll().then( listas =>{
+    Lista.findAll({include: [{model: Funcionario}]}).then( listas =>{
         res.render("admin/listas/list",{listas});
     });    
 });
 
 router.get("/admin/listas/funcionario/:id", (req, res) => {
     var funcionarioId = req.params.id;
-    Lista.findAll({where: {funcionarioId}}).then( listas => {
+    Lista.findAll({include: [{model: Funcionario}]},{where: {funcionarioId}}).then( listas => {
         res.render("admin/listas/list",{listas});
     });
 });

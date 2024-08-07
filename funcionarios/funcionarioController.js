@@ -27,14 +27,14 @@ router.post("/admin/funcionarios/save", (req, res) => {
 
 // list
 router.get("/admin/funcionarios", (req, res) => {
-    Funcionario.findAll().then( funcionarios => {
+    Funcionario.findAll({ include: [{model: Empresa}]}).then( funcionarios => {
         res.render("admin/funcionarios/list", {funcionarios});
     });
 });
 
 router.get("/admin/funcionarios/empresas/:id", (req, res) => {
     var empresaId = req.params.id;
-    Funcionario.findAll({where: {empresaId}}).then( funcionarios => {
+    Funcionario.findAll({ include: [{model: Empresa}]}, {where: {empresaId}}).then( funcionarios => {
         res.render("admin/funcionarios/list", {funcionarios});
     });
 });

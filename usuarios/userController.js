@@ -21,7 +21,7 @@ router.post("/admin/usuarios/save", (req, res) => {
 
 // List
 router.get("/admin/usuarios", (req, res) => {
-    User.findAll().then( users => {
+    User.findAll({include:[{model: Funcionario}]}).then( users => {
         res.render("admin/usuarios/list", {users});
     });
 });
