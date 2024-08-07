@@ -13,7 +13,7 @@ router.get("/admin/users/create", (req, res) => {
 
 router.post("/admin/users/save", (req, res) => {
     var {login, senha, funcionarioId} = req.body;
-    User.create({login, senha, funcionarioId}).then(() => {
+    User.create({login, senha, funcionarioId}).then( () => {
         res.redirect("/admin/users");
     });
 });
@@ -30,10 +30,10 @@ router.get("/admin/users", (req, res) => {
 // Update
 router.get("/admin/users/edit/:id", (req, res) => {
     var id = req.params.id;
-    User.findByPk(id).then( user => {
-        Funcionario.findAll().then( funcionarios => {
-            res.render("admin/users/create", {user, funcionarios});
-        });
+    Funcionario.findAll().then( funcionarios => {
+        User.findByPk(id).then( user => {        
+                res.render("admin/users/create", {user, funcionarios});
+            });
     });
 });
 
