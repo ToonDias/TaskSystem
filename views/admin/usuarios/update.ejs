@@ -10,7 +10,12 @@
             <form action="/admin/usuarios/update" method="POST">
                 <input type="hidden" name="id" value="<%= user.id %>">
                 <input type="text" class="form-control" name="login" value="<%= user.login %>"><br>
-                <input type="password" class="form-control" name="senha" value="<%= user.senha %>"><br>
+                <input type="password" class="form-control" name="senhaform" value="<%= user.senha %>"><br>
+                <select name="tipo" class="form-select">
+                    <option selected disabled value="<%= user.tipo %>"><%= user.tipo %></option>
+                    <option value="admin">admin</option>
+                    <option value="normal">normal</option>
+                </select><br>
                 <select name="funcionarioId" class="form-select">
                     <% funcionarios.forEach( funcionario => { %>
                         <% if(user.funcionarioId == funcionario.id){ %>

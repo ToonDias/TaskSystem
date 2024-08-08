@@ -9,7 +9,11 @@
         <div class="card-body">
             <form action="/admin/usuarios/save" method="POST">
                 <input type="text" class="form-control" name="login" placeholder="Login"><br>
-                <input type="password" class="form-control" name="senha" placeholder="********"><br>
+                <input type="password" class="form-control" name="senhaform" placeholder="********"><br>
+                <select name="tipo" class="form-select">
+                    <option value="admin">admin</option>
+                    <option value="normal">normal</option>
+                </select><br>
                 <select name="funcionarioId" class="form-select">
                     <% funcionarios.forEach( funcionario => { %>
                     <option value="<%= funcionario.id %>"><%= funcionario.nome %></option>

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcryptjs");
 
 const User = require("./User");
 const Funcionario = require("../funcionarios/Funcionario");
@@ -12,9 +13,17 @@ router.get("/admin/usuarios/create", (req, res) => {
 });
 
 router.post("/admin/usuarios/save", (req, res) => {
-    var {login, senha, funcionarioId} = req.body;
-    User.create({login, senha, funcionarioId}).then( () => {
-        res.redirect("/admin/usuarios");
+    var {login, senhaform, tipo, funcionarioId} = req.body;
+    User.findOne({where: {login}}).then( user => {
+        if(user == undefined){
+            var salt = bcrypt.genSaltSync(10);
+            var senha = bcrypt.hashSync(senhaform, salt);
+            User.create({login, senha, tipo, funcionarioId}).then( () => {
+                res.redirect("/admin/usuarios");
+            });
+        }else{
+            res.redirect("/admin/usuarios/create");
+        }
     });
 });
 // Create
@@ -38,8 +47,9 @@ router.get("/admin/usuarios/editar/:id", (req, res) => {
 });
 
 router.post("/admin/usuarios/update", (req, res) => {
-    var {id, login, senha, funcionarioId} = req.body;
-    User.update({login, senha, funcionarioId}, {where: {id}}).then(() => {
+    var {id, login, senhaform, tipo, funcionarioId} = req.body;
+    var senha = senhaform;
+    User.update({login, senha, tipo, funcionarioId}, {where: {id}}).then(() => {
         res.redirect("/admin/usuarios");
     });
 });

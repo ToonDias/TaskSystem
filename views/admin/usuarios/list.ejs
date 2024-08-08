@@ -10,7 +10,7 @@
             <tr>
                 <th>#</th>
                 <th>Login</th>
-                <th>Senha</th>
+                <th>tipo</th>
                 <th>Funcionário</th>
                 <th>Ações</th>
             </tr>
@@ -20,7 +20,7 @@
                 <tr>
                     <td><%= user.id %></td>
                     <td><%= user.login %></td>
-                    <td><%= user.senha %></td>
+                    <td><%= user.tipo %></td>
                     <td><%= user.funcionario.nome %></td>
                     <td>
                         <a href="/admin/usuarios/editar/<%= user.id %>" class="btn btn-warning">Editar</a>

@@ -11,6 +11,10 @@ const User = Connection.define("users", {
     senha: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    tipo: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 });
 
