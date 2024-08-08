@@ -5,6 +5,8 @@ const bcrypt = require("bcryptjs");
 const User = require("./User");
 const Funcionario = require("../funcionarios/Funcionario");
 
+const adminAuth = require("../middlewares/adminAuth");
+
 // Create
 router.get("/admin/usuarios/create", (req, res) => {
     Funcionario.findAll().then( funcionarios => {
@@ -29,7 +31,7 @@ router.post("/admin/usuarios/save", (req, res) => {
 // Create
 
 // List
-router.get("/admin/usuarios", (req, res) => {
+router.get("/admin/usuarios", adminAuth, (req, res) => {
     User.findAll({include:[{model: Funcionario}]}).then( users => {
         res.render("admin/usuarios/list", {users});
     });
@@ -63,5 +65,34 @@ router.post("/admin/usuarios/delete", (req, res) => {
     });
 });
 // Delete
+
+// Logar
+router.get("/login", (req, res) => {
+    res.render("admin/usuarios/login");
+});
+
+router.post("/autenticar", (req, res) => {
+    var {login, senhaform} = req.body;
+
+    User.findOne({where: {login}}).then( user => {
+        if(user != undefined){
+            var logar = bcrypt.compareSync(senhaform, user.senha);
+            if(logar){
+                req.session.user = {
+                    login: user.login,
+                    tipo: user.tipo,
+                    funcionario: user.funcionarioId
+                }
+                res.redirect("/admin")
+            }else{
+                res.redirect("/login");
+            }
+        }else{
+            res.redirect("/login");
+        }
+    });
+});
+
+// Logar
 
 module.exports = router;

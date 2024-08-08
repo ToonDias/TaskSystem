@@ -1,0 +1,18 @@
+<%- include('../../header.ejs') %>
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h2>Logar admin</h2>
+        </div>
+        <div class="card-body">
+            <form action="/autenticar" method="POST">
+                <input type="text" class="form-control" name="login" placeholder="Login"><br>
+                <input type="password" class="form-control" name="senhaform" placeholder="********"><br>
+                <button class="btn btn-success">Logar</button>
+            </form>
+        </div>
+    </div>
+    <br>
+</div>
+<%- include('../../footer.ejs') %>

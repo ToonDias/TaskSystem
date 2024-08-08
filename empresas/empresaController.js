@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Empresa = require("./Empresa");
 
+
 //Create
 router.get("/admin/empresas/create", (req, res) => {
     res.render("admin/empresas/create");

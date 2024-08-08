@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const Connection = require("./database/database");
+const session =  require("express-session");
 
 const Empresa = require("./empresas/Empresa");
 const empresaController = require("./empresas/empresaController");
@@ -17,6 +18,12 @@ const app = express();
 
 // configuração do template engine
 app.set('view engine', 'ejs');
+
+// configuração de sessions
+app.use(session({
+    secret: "qualquercoisaaleatoria",
+    cookie: {maxAge: 30000}
+}));
 
 // configuração do body-parser
 app.use(bodyParser.urlencoded({extended: false}));
