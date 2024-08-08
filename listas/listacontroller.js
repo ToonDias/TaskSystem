@@ -12,8 +12,8 @@ router.get("/admin/listas/create",(req ,res) => {
 });
 
 router.post("/admin/listas/save", (req, res) => {
-    var {titulo, responsavel, status, funcionarioId} = req.body;
-    Lista.create({titulo, responsavel, status, funcionarioId}).then(() =>{
+    var {titulo, status, funcionarioId} = req.body;
+    Lista.create({titulo, status, funcionarioId}).then(() =>{
         res.redirect("/admin/listas");
     });
 });
@@ -45,8 +45,8 @@ router.get("/admin/listas/editar/:id", (req, res) => {
 });
 
 router.post("/admin/listas/updade", (req, res) => {
-    var {id, titulo, responsavel, status, funcionarioId} = req.body;
-    Lista.update({titulo, responsavel, status, funcionarioId}, {where: {id}}).then(() => {
+    var {id, titulo, status, funcionarioId} = req.body;
+    Lista.update({titulo, status, funcionarioId}, {where: {id}}).then(() => {
         res.redirect("/admin/listas");
     });
 });

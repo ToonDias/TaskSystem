@@ -40,9 +40,9 @@ router.get("/admin/tarefas/editar/:id", (req, res) => {
 });
 
 router.post("/admin/tarefa/updade", (req, res) => {
-    var {id, titulo, descricao} = req.body;
-    Tarefa.update({titulo, descricao}, {where: {id}}).then( () => {
-        res.redirect("/admin/tarefas");
+    var {id, titulo, descricao, listaId} = req.body;
+    Tarefa.update({titulo, descricao, listaId}, {where: {id}}).then( () => {
+        res.redirect("/admin/lista/" + listaId + "/tarefas");
     });
 });
 // update

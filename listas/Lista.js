@@ -8,10 +8,6 @@ const Lista = Connection.define('listas', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    responsavel: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
     status: {
         type: Sequelize.STRING,
         allowNull: false

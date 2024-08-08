@@ -9,7 +9,7 @@
         <div class="card-body">
             <form action="/admin/listas/save" method="POST">
                 <input type="text" class="form-control" name="titulo" placeholder="Titulo da lista"><br>
-                <select name="responsavel" class="form-select">
+                <select name="funcionarioId" class="form-select">
                     <option selected disabled>Nome do responsável</option> 
                     <% funcionarios.forEach( funcionario => { %> 
                         <option value="<%= funcionario.id %>"><%= funcionario.nome %></option> 

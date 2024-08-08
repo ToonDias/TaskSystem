@@ -10,7 +10,7 @@
             <form action="/admin/listas/updade" method="POST">
                 <input type="hidden" name="id" value=" <%= lista.id %>">
                 <input type="text" class="form-control" name="titulo" value="<%= lista.titulo %>"><br>
-                <select name="responsavel" class="form-select">
+                <select name="funcionarioId" class="form-select">
                     <% funcionarios.forEach( funcionario => { %>
                         <% if(lista.funcionarioId == funcionario.id){ %>
                         <option selected disabled value="<%= funcionario.id %>"><%= funcionario.nome %></option>

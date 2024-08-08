@@ -9,6 +9,7 @@
         <div class="card-body">
             <form action="/admin/tarefa/updade" method="POST">
                 <input type="hidden" name="id" value=" <%= tarefa.id %>">
+                <input type="hidden" name="listaId" value=" <%= tarefa.listaId %>">
                 <input type="text" class="form-control" name="titulo" value="<%= tarefa.titulo %>"><br>
                 <textarea type="text" class="form-control" name="descricao" value="<%= tarefa.descricao %>"></textarea><br>
                 <button class="btn btn-success">Atualizar</button>
