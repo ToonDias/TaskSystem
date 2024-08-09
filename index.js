@@ -14,6 +14,8 @@ const tarefaController = require("./tarefas/tarefaController");
 const User = require("./usuarios/User");
 const userController = require("./usuarios/userController");
 
+const adminAuth = require("./middlewares/adminAuth");
+
 const app = express();
 
 // configuração do template engine
@@ -22,7 +24,7 @@ app.set('view engine', 'ejs');
 // configuração de sessions
 app.use(session({
     secret: "qualquercoisaaleatoria",
-    cookie: {maxAge: 30000}
+    cookie: {maxAge: 600000}
 }));
 
 // configuração do body-parser
@@ -53,7 +55,7 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-app.get("/admin", (req, res) => {
+app.get("/admin", adminAuth, (req, res) => {
     res.render("admin/index");
 });
 

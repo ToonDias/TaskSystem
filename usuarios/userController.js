@@ -8,13 +8,13 @@ const Funcionario = require("../funcionarios/Funcionario");
 const adminAuth = require("../middlewares/adminAuth");
 
 // Create
-router.get("/admin/usuarios/create", (req, res) => {
+router.get("/admin/usuarios/create", adminAuth, (req, res) => {
     Funcionario.findAll().then( funcionarios => {
         res.render("admin/usuarios/create", {funcionarios});
     });
 });
 
-router.post("/admin/usuarios/save", (req, res) => {
+router.post("/admin/usuarios/save", adminAuth, (req, res) => {
     var {login, senhaform, tipo, funcionarioId} = req.body;
     User.findOne({where: {login}}).then( user => {
         if(user == undefined){
@@ -39,7 +39,7 @@ router.get("/admin/usuarios", adminAuth, (req, res) => {
 // List
 
 // Update
-router.get("/admin/usuarios/editar/:id", (req, res) => {
+router.get("/admin/usuarios/editar/:id", adminAuth, (req, res) => {
     var id = req.params.id;
     Funcionario.findAll().then( funcionarios => {
         User.findByPk(id).then( user => {        
@@ -48,7 +48,7 @@ router.get("/admin/usuarios/editar/:id", (req, res) => {
     });
 });
 
-router.post("/admin/usuarios/update", (req, res) => {
+router.post("/admin/usuarios/update", adminAuth, (req, res) => {
     var {id, login, senhaform, tipo, funcionarioId} = req.body;
     var senha = senhaform;
     User.update({login, senha, tipo, funcionarioId}, {where: {id}}).then(() => {
@@ -58,7 +58,7 @@ router.post("/admin/usuarios/update", (req, res) => {
 // Update
 
 // Delete
-router.post("/admin/usuarios/delete", (req, res) => {
+router.post("/admin/usuarios/delete", adminAuth, (req, res) => {
     var id = req.body.id;
     User.destroy({where: {id}}).then(() => {
         res.redirect("/admin/usuarios");
@@ -93,6 +93,10 @@ router.post("/autenticar", (req, res) => {
     });
 });
 
+router.get("/logout", (req , res) => {
+    req.session.user = undefined;
+    res.redirect("/login")
+});
 // Logar
 
 module.exports = router;
