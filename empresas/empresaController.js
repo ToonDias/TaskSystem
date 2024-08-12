@@ -3,15 +3,15 @@ const router = express.Router();
 
 const Empresa = require("./Empresa");
 
-const adminAuth = require("../middlewares/userAuth");
+const {isAdmin} = require("../middlewares/userAuth");
 
 
 //Create
-router.get("/admin/empresas/create", adminAuth, (req, res) => {
+router.get("/admin/empresas/create", isAdmin, (req, res) => {
     res.render("admin/empresas/create");
 });
 
-router.post("/admin/empresas/save", adminAuth, (req, res) => {
+router.post("/admin/empresas/save", isAdmin, (req, res) => {
     var {razao, fantasia, cnpj, responsavel} = req.body;
     Empresa.create({razao, fantasia, cnpj, responsavel}).then(() =>{
         res.redirect("/admin/empresas");
@@ -20,7 +20,7 @@ router.post("/admin/empresas/save", adminAuth, (req, res) => {
 //Create
 
 //List
-router.get("/admin/empresas", adminAuth, (req, res) => {
+router.get("/admin/empresas", isAdmin, (req, res) => {
     Empresa.findAll().then( empresas =>{
         res.render("admin/empresas/list", {empresas});
     });
@@ -28,14 +28,14 @@ router.get("/admin/empresas", adminAuth, (req, res) => {
 //List
 
 //Edit
-router.get("/admin/empresas/editar/:id", adminAuth, (req, res) => {
+router.get("/admin/empresas/editar/:id", isAdmin, (req, res) => {
     var id = req.params.id;
     Empresa.findByPk(id).then( empresa => {
         res.render("admin/empresas/update",{empresa});
     });
 });
 
-router.post("/admin/empresas/update", adminAuth, (req, res) => {
+router.post("/admin/empresas/update", isAdmin, (req, res) => {
     var {id, razao, fantasia, cnpj, responsavel} = req.body;
     Empresa.update({razao, fantasia, cnpj, responsavel},{where: {id}}).then(() => {
         res.redirect("/admin/empresas");
@@ -44,7 +44,7 @@ router.post("/admin/empresas/update", adminAuth, (req, res) => {
 //Edit
 
 // Delete
-router.post("/admin/empresas/delete", adminAuth, (req, res)=> {
+router.post("/admin/empresas/delete", isAdmin, (req, res)=> {
     var id = req.body.id;
     Empresa.destroy({where: {id}}).then(() => {
         res.redirect("/admin/empresas");

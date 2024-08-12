@@ -5,16 +5,16 @@ const bcrypt = require("bcryptjs");
 const User = require("./User");
 const Funcionario = require("../funcionarios/Funcionario");
 
-const adminAuth = require("../middlewares/userAuth");
+const {isAdmin} = require("../middlewares/userAuth");
 
 // Create
-router.get("/admin/usuarios/create", adminAuth, (req, res) => {
+router.get("/admin/usuarios/create", isAdmin, (req, res) => {
     Funcionario.findAll().then( funcionarios => {
         res.render("admin/usuarios/create", {funcionarios});
     });
 });
 
-router.post("/admin/usuarios/save", adminAuth, (req, res) => {
+router.post("/admin/usuarios/save", isAdmin, (req, res) => {
     var {login, senhaform, tipo, funcionarioId} = req.body;
     User.findOne({where: {login}}).then( user => {
         if(user == undefined){
@@ -31,7 +31,7 @@ router.post("/admin/usuarios/save", adminAuth, (req, res) => {
 // Create
 
 // List
-router.get("/admin/usuarios", adminAuth, (req, res) => {
+router.get("/admin/usuarios", isAdmin, (req, res) => {
     User.findAll({include:[{model: Funcionario}]}).then( users => {
         res.render("admin/usuarios/list", {users});
     });
@@ -39,7 +39,7 @@ router.get("/admin/usuarios", adminAuth, (req, res) => {
 // List
 
 // Update
-router.get("/admin/usuarios/editar/:id", adminAuth, (req, res) => {
+router.get("/admin/usuarios/editar/:id", isAdmin, (req, res) => {
     var id = req.params.id;
     Funcionario.findAll().then( funcionarios => {
         User.findByPk(id).then( user => {        
@@ -48,7 +48,7 @@ router.get("/admin/usuarios/editar/:id", adminAuth, (req, res) => {
     });
 });
 
-router.post("/admin/usuarios/update", adminAuth, (req, res) => {
+router.post("/admin/usuarios/update", isAdmin, (req, res) => {
     var {id, login, senhaform, tipo, funcionarioId} = req.body;
     var senha = senhaform;
     User.update({login, senha, tipo, funcionarioId}, {where: {id}}).then(() => {
@@ -58,7 +58,7 @@ router.post("/admin/usuarios/update", adminAuth, (req, res) => {
 // Update
 
 // Delete
-router.post("/admin/usuarios/delete", adminAuth, (req, res) => {
+router.post("/admin/usuarios/delete", isAdmin, (req, res) => {
     var id = req.body.id;
     User.destroy({where: {id}}).then(() => {
         res.redirect("/admin/usuarios");

@@ -4,16 +4,16 @@ const router = express.Router();
 const Lista = require("./Lista");
 const Funcionario = require("../funcionarios/Funcionario");
 
-const adminAuth = require("../middlewares/userAuth");
+const {isAdmin} = require("../middlewares/userAuth");
 
 // Create
-router.get("/admin/listas/create", adminAuth, (req ,res) => {
+router.get("/admin/listas/create", isAdmin, (req ,res) => {
     Funcionario.findAll().then( funcionarios => {
         res.render("admin/listas/create", {funcionarios});
     });
 });
 
-router.post("/admin/listas/save", adminAuth, (req, res) => {
+router.post("/admin/listas/save", isAdmin, (req, res) => {
     var {titulo, status, funcionarioId} = req.body;
     Lista.create({titulo, status, funcionarioId}).then(() =>{
         res.redirect("/admin/listas");
@@ -22,13 +22,13 @@ router.post("/admin/listas/save", adminAuth, (req, res) => {
 // Create
 
 // Listar
-router.get("/admin/listas", adminAuth, (req, res) =>{
+router.get("/admin/listas", isAdmin, (req, res) =>{
     Lista.findAll({include: [{model: Funcionario}]}).then( listas =>{
         res.render("admin/listas/list",{listas});
     });    
 });
 
-router.get("/admin/funcionario/:id/listas", adminAuth, (req, res) => {
+router.get("/admin/funcionario/:id/listas", isAdmin, (req, res) => {
     var funcionarioId = req.params.id;
     Lista.findAll({include: [{model: Funcionario}]},{where: {funcionarioId}}).then( listas => {
         res.render("admin/listas/list",{listas});
@@ -37,7 +37,7 @@ router.get("/admin/funcionario/:id/listas", adminAuth, (req, res) => {
 // Listar
 
 // Update
-router.get("/admin/listas/editar/:id", adminAuth, (req, res) => {
+router.get("/admin/listas/editar/:id", isAdmin, (req, res) => {
     var id = req.params.id;
     Funcionario.findAll().then( funcionarios => {
         Lista.findByPk(id).then( lista => {
@@ -46,7 +46,7 @@ router.get("/admin/listas/editar/:id", adminAuth, (req, res) => {
     });
 });
 
-router.post("/admin/listas/updade", adminAuth, (req, res) => {
+router.post("/admin/listas/updade", isAdmin, (req, res) => {
     var {id, titulo, status, funcionarioId} = req.body;
     Lista.update({titulo, status, funcionarioId}, {where: {id}}).then(() => {
         res.redirect("/admin/listas");
@@ -55,7 +55,7 @@ router.post("/admin/listas/updade", adminAuth, (req, res) => {
 // Update
 
 // Delete
-router.post("/admin/listas/delete", adminAuth, (req, res) => {
+router.post("/admin/listas/delete", isAdmin, (req, res) => {
     var id = req.body.id;
     Lista.destroy({where: {id}}).then(() => {
         res.redirect("/admin/listas");

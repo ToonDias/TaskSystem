@@ -4,17 +4,17 @@ const router = express.Router();
 const Tarefa = require("./Tarefa");
 const Lista = require("../listas/Lista");
 
-const adminAuth = require("../middlewares/userAuth");
+const {isAdmin} = require("../middlewares/userAuth");
 
 // Create
-router.get("/admin/lista/:id/tarefas/create", adminAuth, (req, res) => {
+router.get("/admin/lista/:id/tarefas/create", isAdmin, (req, res) => {
     var id = req.params.id;
     Lista.findByPk(id).then( lista => {
         res.render("admin/tarefas/create", {lista});
     });
 });
 
-router.post("/admin/tarefas/save", adminAuth, (req, res) => {
+router.post("/admin/tarefas/save", isAdmin, (req, res) => {
     var {titulo, descricao, listaId} = req.body;
     Tarefa.create({titulo, descricao, listaId}).then( () => {
         res.redirect("/admin/lista/" + listaId + "/tarefas");
@@ -23,7 +23,7 @@ router.post("/admin/tarefas/save", adminAuth, (req, res) => {
 // Create
 
 // Listar
-router.get("/admin/lista/:id/tarefas", adminAuth, (req, res) => {
+router.get("/admin/lista/:id/tarefas", isAdmin, (req, res) => {
     var listaId = req.params.id;
     Tarefa.findAll({where: {listaId}}).then( tarefas => {
         Lista.findByPk(listaId).then( lista => {
@@ -34,14 +34,14 @@ router.get("/admin/lista/:id/tarefas", adminAuth, (req, res) => {
 // Listar
 
 // update
-router.get("/admin/tarefas/editar/:id", adminAuth, (req, res) => {
+router.get("/admin/tarefas/editar/:id", isAdmin, (req, res) => {
     var id = req.params.id;
     Tarefa.findByPk(id).then( tarefa => {
             res.render("admin/tarefas/update", {tarefa});
         });
 });
 
-router.post("/admin/tarefa/updade", adminAuth, (req, res) => {
+router.post("/admin/tarefa/updade", isAdmin, (req, res) => {
     var {id, titulo, descricao, listaId} = req.body;
     Tarefa.update({titulo, descricao, listaId}, {where: {id}}).then( () => {
         res.redirect("/admin/lista/" + listaId + "/tarefas");
@@ -50,7 +50,7 @@ router.post("/admin/tarefa/updade", adminAuth, (req, res) => {
 // update
 
 // delete
-router.post("/admin/tarefas/delete", adminAuth, (req, res) => {
+router.post("/admin/tarefas/delete", isAdmin, (req, res) => {
     var id = req.body.id;
     Tarefa.destroy({where: {id}}).then( () => {
         res.redirect("/admin/tarefas")

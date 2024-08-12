@@ -10,7 +10,7 @@ function isAdmin(req, res, next){
     }
 }
 
-function isNormalUser(req, res, next) {
+function isNormal(req, res, next) {
     if(req.session.user != undefined){
         if(req.session.user.tipo == "normal"){
             next();
@@ -22,6 +22,4 @@ function isNormalUser(req, res, next) {
     }
 }
 
-
-
-module.exports = {isAdmin, isNormalUser};
+module.exports = {isAdmin, isNormal};
