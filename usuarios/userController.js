@@ -83,7 +83,11 @@ router.post("/autenticar", (req, res) => {
                     tipo: user.tipo,
                     funcionario: user.funcionarioId
                 }
-                res.redirect("/admin")
+                if(req.session.user.tipo == "admin"){
+                    res.redirect("/admin");
+                }else{
+                    res.redirect("/")
+                }
             }else{
                 res.redirect("/login");
             }
