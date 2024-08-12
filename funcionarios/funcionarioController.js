@@ -4,7 +4,7 @@ const router = express.Router();
 const Funcionario = require("./Funcionario");
 const Empresa = require("../empresas/Empresa");
 
-const adminAuth = require("../middlewares/adminAuth");
+const adminAuth = require("../middlewares/userAuth");
 
 // create
 router.get("/admin/funcionarios/create", adminAuth, (req, res) => {

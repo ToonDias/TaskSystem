@@ -14,7 +14,7 @@ const tarefaController = require("./tarefas/tarefaController");
 const User = require("./usuarios/User");
 const userController = require("./usuarios/userController");
 
-const adminAuth = require("./middlewares/adminAuth");
+const adminAuth = require("./middlewares/userAuth");
 
 const app = express();
 
@@ -51,7 +51,7 @@ app.use("/", tarefaController);
 app.use("/", userController);
 
 // Rota raiz
-app.get("/", (req, res) => {
+app.get("/",(req, res) => {
     res.render("index");
 });
 

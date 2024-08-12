@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Empresa = require("./Empresa");
 
-const adminAuth = require("../middlewares/adminAuth");
+const adminAuth = require("../middlewares/userAuth");
 
 
 //Create

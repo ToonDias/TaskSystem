@@ -4,7 +4,7 @@ const router = express.Router();
 const Tarefa = require("./Tarefa");
 const Lista = require("../listas/Lista");
 
-const adminAuth = require("../middlewares/adminAuth");
+const adminAuth = require("../middlewares/userAuth");
 
 // Create
 router.get("/admin/lista/:id/tarefas/create", adminAuth, (req, res) => {

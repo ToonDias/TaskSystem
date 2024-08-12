@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const User = require("./User");
 const Funcionario = require("../funcionarios/Funcionario");
 
-const adminAuth = require("../middlewares/adminAuth");
+const adminAuth = require("../middlewares/userAuth");
 
 // Create
 router.get("/admin/usuarios/create", adminAuth, (req, res) => {

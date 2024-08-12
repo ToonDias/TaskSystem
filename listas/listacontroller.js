@@ -4,7 +4,7 @@ const router = express.Router();
 const Lista = require("./Lista");
 const Funcionario = require("../funcionarios/Funcionario");
 
-const adminAuth = require("../middlewares/adminAuth");
+const adminAuth = require("../middlewares/userAuth");
 
 // Create
 router.get("/admin/listas/create", adminAuth, (req ,res) => {
