@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Lista = require("./Lista");
 const Funcionario = require("../funcionarios/Funcionario");
+const Tarefa = require("../tarefas/Tarefa");
 
 const {isAdmin} = require("../middlewares/userAuth");
 
@@ -57,8 +58,14 @@ router.post("/admin/listas/updade", isAdmin, (req, res) => {
 // Delete
 router.post("/admin/listas/delete", isAdmin, (req, res) => {
     var id = req.body.id;
-    Lista.destroy({where: {id}}).then(() => {
-        res.redirect("/admin/listas");
+    Tarefa.findOne({where: {listaId: id}}).then( tarefa => {
+        if(tarefa == undefined){
+            Lista.destroy({where: {id}}).then(() => {
+                res.redirect("/admin/listas");
+            });
+        }else{
+            res.redirect("/admin/listas");
+        }
     });
 });
 // Delete

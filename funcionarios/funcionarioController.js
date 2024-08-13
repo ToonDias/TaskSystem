@@ -59,14 +59,14 @@ router.post("/admin/funcionarios/update", isAdmin, (req, res) => {
 // delete
 router.post("/admin/funcionarios/delete", isAdmin, (req, res) => {
     var id = req.body.id;
-    User.fidnOne({where: {funcionarioId: id}}).then( user => {
+    User.findOne({where: {funcionarioId: id}}).then( user => {
         Lista.findOne({where: {funcionarioId: id}}).then( lista => {
             if(lista == undefined && user == undefined){
                 Funcionario.destroy({where: {id}}).then(() => {
                     res.redirect("/admin/funcionarios");
                 });
             }else{
-                res.redirect("/admin/listas");
+                res.redirect("/admin/funcionarios");
             }
         });
     });

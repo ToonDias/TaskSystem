@@ -1,4 +1,4 @@
 var user = "root";
-var password = "Aylton=1995";
+var password = "senha_aqui";
 
 module.exports = {user, password};
