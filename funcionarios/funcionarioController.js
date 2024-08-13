@@ -3,6 +3,8 @@ const router = express.Router();
 
 const Funcionario = require("./Funcionario");
 const Empresa = require("../empresas/Empresa");
+const Lista = require("../listas/Lista");
+const User = require("../usuarios/User")
 
 const {isAdmin} = require("../middlewares/userAuth");
 
@@ -57,8 +59,16 @@ router.post("/admin/funcionarios/update", isAdmin, (req, res) => {
 // delete
 router.post("/admin/funcionarios/delete", isAdmin, (req, res) => {
     var id = req.body.id;
-    Funcionario.destroy({where: {id}}).then(() => {
-        res.redirect("/admin/funcionarios");
+    User.fidnOne({where: {funcionarioId: id}}).then( user => {
+        Lista.findOne({where: {funcionarioId: id}}).then( lista => {
+            if(lista == undefined && user == undefined){
+                Funcionario.destroy({where: {id}}).then(() => {
+                    res.redirect("/admin/funcionarios");
+                });
+            }else{
+                res.redirect("/admin/listas");
+            }
+        });
     });
 });
 // delete

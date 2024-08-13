@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const Empresa = require("./Empresa");
+const Funcionario = require("../funcionarios/Funcionario");
 
 const {isAdmin} = require("../middlewares/userAuth");
+const { where } = require("sequelize");
 
 
 //Create
@@ -46,8 +48,14 @@ router.post("/admin/empresas/update", isAdmin, (req, res) => {
 // Delete
 router.post("/admin/empresas/delete", isAdmin, (req, res)=> {
     var id = req.body.id;
-    Empresa.destroy({where: {id}}).then(() => {
-        res.redirect("/admin/empresas");
+    Funcionario.findOne({where: {empresaId: id}}).then( funcionario => {
+        if(funcionario == undefined){
+            Empresa.destroy({where: {id}}).then(() => {
+                res.redirect("/admin/empresas");
+            });
+        }else{
+            res.redirect("/admin/empresas");
+        }
     });
 });
 // Delete
